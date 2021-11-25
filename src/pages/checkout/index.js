@@ -6,7 +6,7 @@ import CheckoutProduct from "../../components/CheckoutProduct";
 import Currency from "react-currency-formatter";
 import { useSession } from "next-auth/client";
 import { loadStripe } from "@stripe/stripe-js";
-import next from "next";
+import axios from "axios";
 
 // public key comes from next.config.js that recives the real key from .env.local
 const stripePromise = loadStripe(process.env.stripe_public_key);
@@ -20,8 +20,19 @@ function Checkout() {
     const stripe = await stripePromise;
 
     // call backend and create a checkout session
-    
-  }
+    const checkoutSession = await axios.post("/api/create-checkout-session", {
+      items: items,
+      email: session.user.email
+    });
+
+    // redirect user to stripe checkout
+    const result = await stripe.redirectToCheckout({
+      // session is created on create-checkout-session and pass throught checkoutSession
+      sessionId: checkoutSession.data.id
+    });
+
+    if (result.error) alert(result.error.message);
+  };
 
   return (
     <div className="bg-gray-100">
