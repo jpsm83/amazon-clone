@@ -28,6 +28,7 @@ export default async (req, res) => {
     mode: "payment",
     success_url: `${process.env.HOST}/success`,
     cancel_url: `${process.env.HOST}/checkout`,
+    // metadata will be use in the webHooks
     metadata: {
       email,
       images: JSON.stringify(items.map((item) => item.image)),
