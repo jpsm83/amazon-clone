@@ -1,4 +1,5 @@
 import { buffer } from "micro";
+// firebase-admin manage the backend, run on server side
 import * as admin from "firebase-admin";
 
 // secure a connection to FIREBASE from the backend
