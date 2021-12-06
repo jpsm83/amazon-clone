@@ -15,9 +15,6 @@
 # production
 /build
 
-# firestore permission
-permissions.json
-
 # misc
 .DS_Store
 *.pem
