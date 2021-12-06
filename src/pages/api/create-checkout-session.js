@@ -9,6 +9,7 @@ export default async (req, res) => {
     quantity: 1,
     price_data: {
       currency: "eur",
+      //unit amount comes in cents, thats why multiply by 100
       unit_amount: item.price * 100,
       product_data: {
         name: item.title,
@@ -35,5 +36,6 @@ export default async (req, res) => {
     },
   });
 
-  res.status(200).json({ id: session.id })
+  // every request needs a response - every req needs a res
+  res.status(200).json({ id: session.id });
 };

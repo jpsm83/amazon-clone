@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 import { selectItems } from "../slices/basketSlice";
 
 function Header() {
-  const [session, loading] = useSession();
+  const [session] = useSession();
   const router = useRouter();
   const items = useSelector(selectItems)
 

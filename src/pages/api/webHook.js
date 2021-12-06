@@ -16,8 +16,7 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const endpointSecret = process.env.STRIPE_SIGNING_SECRET;
 
 const fulfillOrder = async (session) => {
-  //console.log("Fulfilling order", session)
-
+  console.log('Fulfilling Order', session)
   // all the metadata comes from create-checkout-session
   return app
     .firestore()
@@ -29,12 +28,12 @@ const fulfillOrder = async (session) => {
       amount: session.amount_total / 100,
       amount_shipping: session.total_details.amount_shipping / 100,
       images: JSON.parse(session.metadata.images),
-    //   serverTimestamp syncronise times between diferent parts of the word
-      timestamp: admin.firestore.FieldValue.serverTimestamp()
+      //   serverTimestamp syncronise times between diferent parts of the word
+      timestamp: admin.firestore.FieldValue.serverTimestamp(),
     })
     .then(() => {
-        console.log(`SUCESS: order ${session.id} had been ad to the DB`)
-    })
+      console.log(`SUCESS: order ${session.id} had been ad to the DB`);
+    });
 };
 
 export default async (req, res) => {
@@ -43,24 +42,24 @@ export default async (req, res) => {
     const payload = requestBuffer.toString();
     const sig = req.headers["stripe-signature"];
 
-
     let event;
 
     // verify that the event posted came from stripe
     try {
-      event = stripe.webhooks.constructEvent(payload, sig, endpointSecret)
-    // the error been triggred here - find out
+      event = stripe.webhooks.constructEvent(payload, sig, endpointSecret);
+
+      // the error been triggred here - find out
     } catch (err) {
-      console.log("Thats the error", err.message);
+      console.log('ERROR', err.message);
       return res.status(400).send(`Webhook error: ${err.message}`);
     }
 
     // handle the checkout.session.completed event
     if (event.type === "checkout.session.completed") {
-        const session = event.data.object;
-
-        //fulfill the order...
-        return fulfillOrder(session)
+      const session = event.data.object;
+      console.log(session);
+      //fulfill the order...
+      return fulfillOrder(session)
         .then(() => res.status(200))
         .catch((err) => res.status(400).send(`Webhook error: ${err.message}`));
     }
@@ -68,8 +67,8 @@ export default async (req, res) => {
 };
 
 export const config = {
-    api: {
-        bodyParser: false,
-        externalResolver: true
-    }
-}
+  api: {
+    bodyParser: false,
+    externalResolver: true,
+  },
+};

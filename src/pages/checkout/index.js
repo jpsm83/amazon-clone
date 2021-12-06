@@ -16,19 +16,20 @@ function Checkout() {
   const total = useSelector(selectTotal);
   const [session] = useSession();
 
-  const createCheckoutSession = async () => {   
+  const createCheckoutSession = async () => {
     const stripe = await stripePromise;
 
     // call backend and create a checkout session
+    // axios connect frontend with backend
     const checkoutSession = await axios.post("/api/create-checkout-session", {
       items: items,
-      email: session.user.email
+      email: session.user.email,
     });
 
     // redirect user to stripe checkout
     const result = await stripe.redirectToCheckout({
       // session is created on create-checkout-session and pass throught checkoutSession
-      sessionId: checkoutSession.data.id
+      sessionId: checkoutSession.data.id,
     });
 
     if (result.error) alert(result.error.message);
@@ -47,7 +48,6 @@ function Checkout() {
             height={250}
             objectFit="contain"
           />
-
           <div className="flex flex-col p-5 space-y-10 bg-white">
             <h1 className="text-3xl border-b pb-4">
               {items.length === 0
@@ -77,16 +77,16 @@ function Checkout() {
           {items.length > 0 && (
             <>
               <p2 className="whitespace-nowrap">
-                Subtotal ({items.length} items):{' '}
+                Subtotal ({items.length} items):{" "}
                 <span className="font-bold">
                   <Currency quantity={total} currency="EUR" />
                 </span>
               </p2>
 
               <button
-              role="link"
-              onClick={createCheckoutSession}
-              disabled={!session}
+                role="link"
+                onClick={createCheckoutSession}
+                disabled={!session}
                 className={`button mt-2 ${
                   !session &&
                   "from-gray-300 to-gray-500 border-gray-200 text-gray-300 cursor-not-allowed"
