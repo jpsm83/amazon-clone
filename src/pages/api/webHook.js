@@ -56,7 +56,6 @@ export default async (req, res) => {
     // handle the checkout.session.completed event
     if (event.type === "checkout.session.completed") {
       const session = event.data.object;
-      console.log(session);
       //fulfill the order...
       return fulfillOrder(session)
         .then(() => res.status(200))
