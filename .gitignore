@@ -16,7 +16,7 @@
 /build
 
 # firestore permission
-.permissions.json
+.permissions
 
 # misc
 .DS_Store
