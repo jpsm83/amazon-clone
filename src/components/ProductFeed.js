@@ -8,7 +8,7 @@ function ProductFeed({ products }) {
         .map(({ id, title, price, description, category, image }) => {
           return (
             <Product
-              key={id}
+              key={`${Date.now()}${id}`}
               id={id}
               title={title}
               price={price}
@@ -27,7 +27,7 @@ function ProductFeed({ products }) {
           .map(({ id, title, price, description, category, image }) => {
             return (
               <Product
-                key={id}
+                key={`${Date.now()}${price}`}
                 id={id}
                 title={title}
                 price={price}
@@ -44,7 +44,7 @@ function ProductFeed({ products }) {
         .map(({ id, title, price, description, category, image }) => {
           return (
             <Product
-              key={id}
+                key={`${Date.now()}${title}`}
               id={id}
               title={title}
               price={price}

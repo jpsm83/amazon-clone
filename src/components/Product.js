@@ -9,7 +9,7 @@ function Product({ id, title, price, description, category, image }) {
   const dispatch = useDispatch();
 
   const [rating] = useState(Math.floor(Math.random() * 5));
-  const [hasPrime, setHasPrime] = useState(Math.random() < 0.5);
+  const [hasPrime] = useState(Math.random() < 0.5);
 
   const stars = [];
   for (let i = 0; i < rating; i++) {
