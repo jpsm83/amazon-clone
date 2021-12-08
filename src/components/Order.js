@@ -7,7 +7,7 @@ function Order({ id, amount, amountShipping, items, timestamp, images }) {
       <div className="flex items-center space-x-10 p-5 bg-gray-100 text-sm text-gray-600">
         <div>
           <p className="font-bold text-xs">ORDERS PLACED</p>
-          <p>{moment.unix(timestamp).format("DD MM YYYY")}</p>
+          <p>{moment.unix(timestamp).format("DD / MM / YYYY")}</p>
         </div>
 
         <div>
@@ -29,7 +29,7 @@ function Order({ id, amount, amountShipping, items, timestamp, images }) {
           <div className="flex space-x-6 overflow-x-auto">
             {images.map((image) => (
               <img
-                key={`${Date.now()}${timestamp}`}
+                key={id}
                 src={image}
                 alt={items}
                 className="h-20 object-contain sm:h-32"
