@@ -8,7 +8,7 @@ function ProductFeed({ products }) {
         .map(({ id, title, price, description, category, image }) => {
           return (
             <Product
-              key={`${Date.now()}${id}`}
+              key={id}
               id={id}
               title={title}
               price={price}
