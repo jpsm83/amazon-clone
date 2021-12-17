@@ -13,10 +13,6 @@
 # production
 /build
 
-#permissions
-.permissions.json
-/.permissions.json
-
 # misc
 .DS_Store
 *.pem
