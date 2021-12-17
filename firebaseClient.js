@@ -11,14 +11,18 @@ const firebaseConfig = {
   appId: "1:608880089989:web:6c71a75def3704a3d642ec"
 };
 
-const firebaseApp = () => {
-  if (!firebase.apps.length) {
-    firebase.initializeApp(firebaseConfig);
-  }
-  firebase.app();
-  return firebase;
-};
+const app = !firebase.apps.length ? firebase.initializeApp(firebaseConfig) : firebase.app()
 
-const db = firebaseApp().firestore();
+// const firebaseApp = () => {
+//   if (!firebase.apps.length) {
+//     firebase.initializeApp(firebaseConfig);
+//   }
+//   firebase.app();
+//   return firebase;
+// };
+
+// const db = firebaseApp().firestore();
+
+const db = app.firestore();
 
 export default db;
