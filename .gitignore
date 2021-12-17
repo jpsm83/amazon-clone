@@ -13,6 +13,9 @@
 # production
 /build
 
+#permissions
+/.permissions.json
+
 # misc
 .DS_Store
 *.pem
