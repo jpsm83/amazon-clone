@@ -26,7 +26,7 @@ Signin, login and logout with Next-Auth using Google or Github accounts.
 - **checkout** - See and edit your basket before do the payment with Stripe.
 - **orders** - See a history of your orders done.
 - **success** - Get a success page to ensure the order been through.
-- **sign up** - Create client account with Next-Auth.
+- **signup** - Create client account with Next-Auth.
 - **login** - Be able to checkout and pay products from the basket with Stripe.
 - **logout** - Ensure that your personal account session been closed.
 - **products list** - See the list of products on the homepage.
@@ -48,7 +48,7 @@ Signin, login and logout with Next-Auth using Google or Github accounts.
 
 ### Client / Frontend
 
-### Next Routes (React App)
+### Next Routes (Next App)
 | Path | Page | Behavior |
 | - | - | - |
 | `/` | Home Page | Home page, Login link, Signup link, show all products, show basket, link to orders |
@@ -75,7 +75,7 @@ Signin, login and logout with Next-Auth using Google or Github accounts.
 - ProductFeed (Manage and organize all the product cards toguether).
 
 
-### Data Structure FrontEnd
+### Data Structure
 ```
 ├── public
 |   └── images
