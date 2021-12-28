@@ -13,16 +13,6 @@ const firebaseConfig = {
 
 const app = !firebase.apps.length ? firebase.initializeApp(firebaseConfig) : firebase.app()
 
-// const firebaseApp = () => {
-//   if (!firebase.apps.length) {
-//     firebase.initializeApp(firebaseConfig);
-//   }
-//   firebase.app();
-//   return firebase;
-// };
-
-// const db = firebaseApp().firestore();
-
 const db = app.firestore();
 
 export default db;

@@ -1,3 +1,4 @@
+// moment => makes dates and time easy to display, format, parse, validate, and manipulate using a clean and concise API
 import moment from "moment";
 import Currency from "react-currency-formatter";
 

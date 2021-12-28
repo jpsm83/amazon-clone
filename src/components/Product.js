@@ -1,4 +1,9 @@
+// REDUX => create global states that can be access by any component without props drilling
+// because it has lots of boylerplate, it is only used in large projects
+
 import { useState } from "react";
+
+// to use images with next/images you must allow the domain where those images comes from at next.config.js
 import Image from "next/image";
 import { StarIcon } from "@heroicons/react/solid";
 import Currency from "react-currency-formatter";
@@ -6,6 +11,9 @@ import { useDispatch } from "react-redux";
 import { addToBasket } from "../slices/basketSlice";
 
 function Product({ id, title, price, description, category, image }) {
+
+  // dispatch is used by redux to execute an action
+  // in this project, actions are comming from basket
   const dispatch = useDispatch();
 
   const [rating] = useState(Math.floor(Math.random() * 5));
@@ -20,7 +28,7 @@ function Product({ id, title, price, description, category, image }) {
     const product = {
       id, title, price, description, category, image, rating, hasPrime
     }
-    // sending the product as an action to the REDUX store... the basket slice 
+    // dispatch execute a action and send it to REDUX store... the basket slice
     dispatch(addToBasket(product))
   };
 

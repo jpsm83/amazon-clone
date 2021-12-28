@@ -4,7 +4,11 @@ import moment from "moment";
 import db from "../../../firebaseClient";
 import Order from "../../components/Order";
 
+// props orders are got from the function getServerSideProps() on the botton of the page
+// that is a pre-render info from all the user orders info
 function Orders({ orders }) {
+  // session comes from next-Auth/client in the AuthProvider component at app.js
+  // it wraps all our application allowing us to use at any other component
   const [session] = useSession();
 
   return (
@@ -23,9 +27,9 @@ function Orders({ orders }) {
 
         <div className="mt-5 space-y-4">
           {orders?.map(
-            ({ id, amount, amountShipping, items, timestamp, images }) => (
+            ({ id, amount, amountShipping, items, timestamp, images }, i) => (
               <Order
-                key={id}
+                key={id + i}
                 id={id}
                 amount={amount}
                 amountShipping={amountShipping}
@@ -43,10 +47,17 @@ function Orders({ orders }) {
 
 export default Orders;
 
+// user make a request (order) to the server
+// we fetch that data (itens bouth in that order) and pre-render with all its information
+// them page comes back to user fully rendered
+// that is called server side render
 export async function getServerSideProps(context) {
   const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
   // get the users logged in credentials...
+  // we use getSession() insted of "session" because here we are working with backend
+  // getServerSideProps is a nextjs building method that works on backend - node
+  // useSession is a hook used only in the front end
   const session = await getSession(context);
 
   if (!session) {
@@ -81,6 +92,9 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
+      // those are the orders we got from the server and pre-render
+      // server side render
+      // them we pass it to our Order component as props
       orders,
     },
   };

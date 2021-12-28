@@ -1,4 +1,6 @@
 import Header from "../../components/Header";
+
+// to use images with next/images you must allow the domain where those images comes from at next.config.js
 import Image from "next/image";
 import { useSelector } from "react-redux";
 import { selectItems, selectTotal } from "../../slices/basketSlice";
@@ -9,11 +11,17 @@ import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
 
 // public key comes from next.config.js that recives the real key from .env.local
+// loadStripe create one Stripe object
 const stripePromise = loadStripe(process.env.stripe_public_key);
 
 function Checkout() {
+  // selectItems & selectTotal comes from basketSlice
+  // to use those constants we must use useSelector
   const items = useSelector(selectItems);
   const total = useSelector(selectTotal);
+
+  // session comes from next-Auth/client in the AuthProvider component at app.js
+  // it wraps all our application allowing us to use at any other component
   const [session] = useSession();
 
   const createCheckoutSession = async () => {

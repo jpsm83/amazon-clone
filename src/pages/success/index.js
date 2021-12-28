@@ -3,6 +3,7 @@ import { CheckCircleIcon } from "@heroicons/react/solid";
 import { useRouter } from "next/router";
 
 function success() {
+  // useRouter works as the same as Link in React
   const router = useRouter();
 
   return (

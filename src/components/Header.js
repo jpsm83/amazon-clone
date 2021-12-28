@@ -1,3 +1,7 @@
+// REDUX => create global states that can be access by any component without props drilling
+// because it has lots of boylerplate, it is only used in large projects
+
+// to use images with next/images you must allow the domain where those images comes from at next.config.js
 import Image from "next/image";
 import {
   MenuIcon,
@@ -11,8 +15,14 @@ import { useSelector } from "react-redux";
 import { selectItems } from "../slices/basketSlice";
 
 function Header() {
+  // session comes from next-Auth/client in the AuthProvider component at app.js
+  // it wraps all our application allowing us to use at any other component
   const [session] = useSession();
+
+  // useRouter works as the same as Link in React
   const router = useRouter();
+
+  // selectItems is an array of our items, it comes from basketSlice.js
   const items = useSelector(selectItems)
 
   return (
@@ -22,7 +32,7 @@ function Header() {
         {/* logo */}
         <div className="mt-2 flex items-center flex-grow sm:flex-grow-0">
           <Image
-          // router.push are same as Link
+          // router.push are same as Link in react
             onClick={() => router.push('/')}
             src="/images/amazon-logo.png"
             alt="Amazon logo"
